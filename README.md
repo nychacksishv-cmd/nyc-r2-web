@@ -1,36 +1,400 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 NYC Code Quest Round 2 – Frontend
 
-## Getting Started
+Modern frontend built with **Next.js 16**, **React 19**, **TypeScript**, **Tailwind CSS v4**, **shadcn/ui (Nova)**, **Motion**, **GSAP**, and **Lenis**.
 
-First, run the development server:
+---
+
+# 🏆 Tech Stack
+
+* Next.js 16
+* React 19
+* TypeScript
+* Tailwind CSS v4
+* shadcn/ui (Nova)
+* Motion
+* GSAP
+* Lenis
+* Lucide React
+* Sonner
+* TanStack Query
+* React Hook Form
+* Zod
+* Embla Carousel
+
+---
+
+# 📋 Prerequisites
+
+* Node.js **22+**
+* npm **11+**
+* Git
+* Docker Desktop
+* VS Code (Recommended)
+
+Check versions
+
+```bash
+node -v
+npm -v
+```
+
+---
+
+# ⬆️ Update npm
+
+Before installing the project, update npm.
+
+```bash
+npm install -g npm@latest
+```
+
+Verify
+
+```bash
+npm -v
+```
+
+---
+
+# 📥 Clone Repository
+
+```bash
+git clone <REPOSITORY_URL>
+cd nyc-r2-web
+```
+
+---
+
+# 📦 Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+# ▶️ Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 🏗 Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# 📁 Project Structure
 
-## Deploy on Vercel
+```text
+src/
+ ├── app/
+ ├── components/
+ │    ├── ui/
+ │    ├── common/
+ │    └── sections/
+ ├── hooks/
+ ├── lib/
+ ├── providers/
+ ├── services/
+ ├── styles/
+ ├── types/
+ └── utils/
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 🎨 Animation Guidelines
+
+## Motion
+
+Use for
+
+* Hover
+* Tap
+* Cards
+* Buttons
+* Page Transition
+* Modal Animation
+* Stagger Animation
+
+---
+
+## GSAP
+
+Use for
+
+* Hero Section
+* Timeline
+* Scroll Animation
+* SVG Animation
+* Landing Page
+* Complex Sequences
+
+---
+
+## Lenis
+
+Use globally for
+
+* Smooth Scrolling
+* Scroll Experience
+* GSAP ScrollTrigger
+
+---
+
+## shadcn/ui
+
+Use for
+
+* Buttons
+* Cards
+* Forms
+* Dialogs
+* Navigation
+* Tables
+* Drawers
+* Popovers
+* Tabs
+* Sidebar
+
+---
+
+# 🧩 Common Commands
+
+```bash
+npm run dev
+npm run build
+npm start
+npm run lint
+```
+
+---
+
+# 🌐 Documentation
+
+Next.js
+https://nextjs.org/docs
+
+React
+https://react.dev
+
+TypeScript
+https://www.typescriptlang.org/docs/
+
+Tailwind CSS
+https://tailwindcss.com/docs
+
+shadcn/ui
+https://ui.shadcn.com
+
+Motion
+https://motion.dev
+
+GSAP
+https://gsap.com/docs
+
+Lenis
+https://lenis.darkroom.engineering
+
+Lucide React
+https://lucide.dev
+
+Sonner
+https://sonner.emilkowal.ski
+
+TanStack Query
+https://tanstack.com/query
+
+React Hook Form
+https://react-hook-form.com
+
+Zod
+https://zod.dev
+
+Embla Carousel
+https://www.embla-carousel.com
+
+---
+
+# ⭐ UI Philosophy
+
+* Responsive First
+* Mobile First
+* Accessible
+* Reusable Components
+* Dark Mode Support
+* Smooth Animations
+* Minimal Design
+* Performance Focused
+
+---
+
+# 🌿 Git Workflow
+
+Create branch
+
+```bash
+git checkout -b feature/navbar
+```
+
+Commit
+
+```bash
+git add .
+git commit -m "feat: add navbar"
+```
+
+Push
+
+```bash
+git push origin feature/navbar
+```
+
+---
+
+# 🐳 Docker
+
+Build image
+
+```bash
+docker build -t nyc-r2-web .
+```
+
+Run
+
+```bash
+docker run -p 3000:3000 nyc-r2-web
+```
+
+Tag
+
+```bash
+docker tag nyc-r2-web gcr.io/PROJECT_ID/nyc-r2-web
+```
+
+Push
+
+```bash
+docker push gcr.io/PROJECT_ID/nyc-r2-web
+```
+
+Cloud Run
+
+```bash
+gcloud run deploy nyc-r2-web
+```
+
+---
+
+# 🤖 AI Development Notes
+
+* Keep components reusable.
+* Prefer Server Components when possible.
+* Use Client Components only when needed.
+* Follow existing folder structure.
+* Never duplicate components.
+* Keep TypeScript strict.
+* Always lint before committing.
+
+---
+
+# 🚀 Production Stack (2026)
+
+Framework
+
+* Next.js 16
+* React 19
+* TypeScript
+
+UI
+
+* shadcn/ui (Nova)
+* Tailwind CSS v4
+* Lucide React
+
+Animation
+
+* Motion
+* GSAP
+* Lenis
+
+Forms
+
+* React Hook Form
+* Zod
+
+State
+
+* TanStack Query
+
+Utilities
+
+* clsx
+* tailwind-merge
+* class-variance-authority
+
+Notifications
+
+* Sonner
+
+Carousel
+
+* Embla Carousel
+
+---
+
+# 📌 Best Practices
+
+✅ Mobile First
+
+✅ Component Driven
+
+✅ Semantic HTML
+
+✅ Accessibility
+
+✅ Lazy Loading
+
+✅ Image Optimization
+
+✅ Server Components First
+
+✅ Type Safety
+
+✅ Reusable UI
+
+✅ Clean Code
+
+---
+
+# 🛠 Troubleshooting
+
+Clear cache
+
+```bash
+rm -rf .next node_modules package-lock.json
+npm install
+```
+
+Rebuild
+
+```bash
+npm run build
+```
+
+---
+
+# 📄 License
+
+This project is developed for **NYC Code Quest Round 2** by **Team GET 200**. Internal use during the hackathon unless otherwise specified.
