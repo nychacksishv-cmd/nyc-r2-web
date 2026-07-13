@@ -4,7 +4,7 @@ metadata:
   name: get200-ingress
   namespace: get200
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: "get200-ip"
+    kubernetes.io/ingress.global-static-ip-name: "get200-web-ip"
     networking.gke.io/managed-certificates: "frontend-cert"
     kubernetes.io/ingress.class: "gce"
 spec:
