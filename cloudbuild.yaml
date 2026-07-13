@@ -9,20 +9,26 @@ steps:
       - 'NEXT_PUBLIC_API_URL=$_NEXT_PUBLIC_API_URL'
       - '-t'
       - 'asia-south1-docker.pkg.dev/$PROJECT_ID/get200-app-api-repo/frontend:$SHORT_SHA'
+      - '-t'
+      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/get200-app-api-repo/frontend:latest'
       - '.'
 
   # 2. Push the container image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'asia-south1-docker.pkg.dev/$PROJECT_ID/get200-app-api-repo/frontend:$SHORT_SHA']
 
-  # 3. Apply manifests (Deployment, HPA, Service, Ingress) to GKE
+  # 3. Push the latest tag so the base deployment image always exists
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia-south1-docker.pkg.dev/$PROJECT_ID/get200-app-api-repo/frontend:latest']
+
+  # 4. Apply manifests (Deployment, HPA, Service, Ingress) to GKE
   - name: 'gcr.io/cloud-builders/kubectl'
     args: ['apply', '-f', 'k8s/', '--namespace=get200']
     env:
-      - 'CLOUDSDK_COMPUTE_ZONE=$_ZONE'
+      - 'CLOUDSDK_COMPUTE_REGION=$_REGION'
       - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
 
-  # 4. Set the newly built image version in the deployment
+  # 5. Set the newly built image version in the deployment
   - name: 'gcr.io/cloud-builders/kubectl'
     args:
       - 'set'
@@ -31,11 +37,11 @@ steps:
       - 'get200-frontend=asia-south1-docker.pkg.dev/$PROJECT_ID/get200-app-api-repo/frontend:$SHORT_SHA'
       - '--namespace=get200'
     env:
-      - 'CLOUDSDK_COMPUTE_ZONE=$_ZONE'
+      - 'CLOUDSDK_COMPUTE_REGION=$_REGION'
       - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
 
 substitutions:
-  _ZONE: asia-south1
+  _REGION: us-central1
   _CLUSTER_NAME: nyc-r2-web
   _NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_Z3VpZGluZy1qZW5uZXQtNzkuY2xlcmsuYWNjb3VudHMuZGV2JA
   _NEXT_PUBLIC_API_URL: https://api.get200.qd.je
