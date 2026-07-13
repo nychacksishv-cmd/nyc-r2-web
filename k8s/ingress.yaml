@@ -5,7 +5,7 @@ metadata:
   namespace: get200
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "get200-ip"
-    networking.gke.io/managed-certificates: "frontend-cert,get200-cert"
+    networking.gke.io/managed-certificates: "frontend-cert"
     kubernetes.io/ingress.class: "gce"
 spec:
   rules:
@@ -17,16 +17,6 @@ spec:
             backend:
               service:
                 name: frontend-svc
-                port:
-                  number: 80
-    - host: api.get200.qd.je # Backend API routing
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: backend-svc
                 port:
                   number: 80
 ---
