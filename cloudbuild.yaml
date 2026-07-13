@@ -21,14 +21,33 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'asia-south1-docker.pkg.dev/$PROJECT_ID/get200-app-api-repo/frontend:latest']
 
-  # 4. Apply manifests (Deployment, HPA, Service, Ingress) to GKE
+  # 4. Create/update the namespace before applying namespaced resources.
   - name: 'gcr.io/cloud-builders/kubectl'
-    args: ['apply', '-f', 'k8s/', '--namespace=get200']
+    args: ['apply', '-f', 'k8s/namespace.yaml']
     env:
       - 'CLOUDSDK_COMPUTE_REGION=$_REGION'
       - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
 
-  # 5. Set the newly built image version in the deployment
+  # 5. Apply manifests (Deployment, HPA, Service, Ingress) to GKE
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      - 'apply'
+      - '-f'
+      - 'k8s/ksa.yaml'
+      - '-f'
+      - 'k8s/frontend-service.yaml'
+      - '-f'
+      - 'k8s/deployment.yaml'
+      - '-f'
+      - 'k8s/hpa.yaml'
+      - '-f'
+      - 'k8s/ingress.yaml'
+      - '--namespace=get200'
+    env:
+      - 'CLOUDSDK_COMPUTE_REGION=$_REGION'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
+
+  # 6. Set the newly built image version in the deployment
   - name: 'gcr.io/cloud-builders/kubectl'
     args:
       - 'set'
