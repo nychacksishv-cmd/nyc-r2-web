@@ -5,7 +5,7 @@ metadata:
   namespace: get200
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "get200-ip"
-    networking.gke.io/managed-certificates: "frontend-cert,api-cert" # References both certificates
+    networking.gke.io/managed-certificates: "frontend-cert,get200-cert"
     kubernetes.io/ingress.class: "gce"
 spec:
   rules:
@@ -38,12 +38,3 @@ metadata:
 spec:
   domains:
     - get200.qd.je
----
-apiVersion: networking.gke.io/v1
-kind: ManagedCertificate
-metadata:
-  name: api-cert
-  namespace: get200
-spec:
-  domains:
-    - api.get200.qd.je
