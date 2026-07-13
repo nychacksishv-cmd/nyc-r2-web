@@ -30,8 +30,8 @@ spec:
                   key: CLERK_SECRET_KEY # Fixed: Points to key name inside secret
           resources:
             requests:
-              cpu: "100m"
-              memory: "128Mi"
+              cpu: "50m"
+              memory: "52Mi"
             limits:
               cpu: "500m"
               memory: "512Mi"
