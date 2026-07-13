@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+  namespace: get200
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}' # Tells GKE Autopilot to use Network Endpoint Groups for fast load balancing
+spec:
+  selector:
+    app: get200-frontend
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: ClusterIP
