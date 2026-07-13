@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NYC R2 Auth Demo",
-  description: "Next.js frontend with Clerk auth and FastAPI backend",
+  title: "Get200 Hackathon Starter",
+  description: "Next.js, Clerk, FastAPI, Postgres, and GKE starter for hackathons",
 };
 
 export default function RootLayout({
