@@ -4,7 +4,7 @@ Modern frontend built with **Next.js 16**, **React 19**, **TypeScript**, **Tailw
 
 ---
 
-# 🏆 Tech Stack
+# 🏆 Tech Stack 
 
 * Next.js 16
 * React 19
