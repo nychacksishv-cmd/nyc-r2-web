@@ -60,7 +60,7 @@ steps:
       - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
 
 substitutions:
-  _REGION: us-central1
+  _REGION: asia-south1
   _CLUSTER_NAME: nyc-r2-api
   _NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_Z3VpZGluZy1qZW5uZXQtNzkuY2xlcmsuYWNjb3VudHMuZGV2JA
   _NEXT_PUBLIC_API_URL: https://api.get200.qd.je
