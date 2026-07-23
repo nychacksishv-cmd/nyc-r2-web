@@ -13,7 +13,7 @@ export default async function LandingPage() {
           NYC R2 Auth Demo
         </span>
 
-        {/* <div className="space-y-4">
+        <div className="space-y-4">
           <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">
             Secure frontend + backend auth with Clerk
           </h1>
@@ -21,7 +21,7 @@ export default async function LandingPage() {
             Sign in with Clerk, then go to the protected dashboard where the Next.js app attaches the
             user session token to the FastAPI backend call.
           </p>
-        </div> */}
+        </div>
 
         <div className="flex items-center gap-4">
           {!userId ? (
