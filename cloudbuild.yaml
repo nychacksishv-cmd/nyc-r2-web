@@ -1,69 +1,33 @@
 steps:
-  # 1. Build the container image passing NextJS compile-time build args
-  - name: 'gcr.io/cloud-builders/docker'
-    args: 
-      - 'build'
-      - '--build-arg'
-      - 'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=$_NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY'
-      - '--build-arg'
-      - 'NEXT_PUBLIC_API_URL=$_NEXT_PUBLIC_API_URL'
-      - '-t'
-      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/get200-app-api-repo/frontend:$SHORT_SHA'
-      - '-t'
-      - 'asia-south1-docker.pkg.dev/$PROJECT_ID/get200-app-api-repo/frontend:latest'
-      - '.'
-
-  # 2. Push the container image to Artifact Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'asia-south1-docker.pkg.dev/$PROJECT_ID/get200-app-api-repo/frontend:$SHORT_SHA']
-
-  # 3. Push the latest tag so the base deployment image always exists
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'asia-south1-docker.pkg.dev/$PROJECT_ID/get200-app-api-repo/frontend:latest']
-
-  # 4. Create/update the namespace before applying namespaced resources.
-  - name: 'gcr.io/cloud-builders/kubectl'
-    args: ['apply', '-f', 'k8s/namespace.yaml']
-    env:
-      - 'CLOUDSDK_COMPUTE_REGION=$_REGION'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
-
-  # 5. Apply manifests (Deployment, HPA, Service, Ingress) to GKE
-  - name: 'gcr.io/cloud-builders/kubectl'
+  - name: "gcr.io/cloud-builders/docker"
     args:
-      - 'apply'
-      - '-f'
-      - 'k8s/ksa.yaml'
-      - '-f'
-      - 'k8s/frontend-service.yaml'
-      - '-f'
-      - 'k8s/deployment.yaml'
-      - '-f'
-      - 'k8s/hpa.yaml'
-      - '-f'
-      - 'k8s/ingress.yaml'
-      - '--namespace=get200'
-    env:
-      - 'CLOUDSDK_COMPUTE_REGION=$_REGION'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
+      - build
+      - -t
+      - asia-south1-docker.pkg.dev/$PROJECT_ID/get200-web-repo/frontend:$SHORT_SHA
+      - -t
+      - asia-south1-docker.pkg.dev/$PROJECT_ID/get200-web-repo/frontend:latest
+      - .
 
-  # 6. Set the newly built image version in the deployment
-  - name: 'gcr.io/cloud-builders/kubectl'
+  - name: "gcr.io/cloud-builders/docker"
     args:
-      - 'set'
-      - 'image'
-      - 'deployment/get200-frontend'
-      - 'get200-frontend=asia-south1-docker.pkg.dev/$PROJECT_ID/get200-app-api-repo/frontend:$SHORT_SHA'
-      - '--namespace=get200'
-    env:
-      - 'CLOUDSDK_COMPUTE_REGION=$_REGION'
-      - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
+      - push
+      - asia-south1-docker.pkg.dev/$PROJECT_ID/get200-web-repo/frontend:$SHORT_SHA
 
-substitutions:
-  _REGION: asia-south1
-  _CLUSTER_NAME: nyc-r2-api
-  _NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_Z3VpZGluZy1qZW5uZXQtNzkuY2xlcmsuYWNjb3VudHMuZGV2JA
-  _NEXT_PUBLIC_API_URL: https://api.get200.qd.je
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - push
+      - asia-south1-docker.pkg.dev/$PROJECT_ID/get200-web-repo/frontend:latest
+
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - get200-web
+      - --image=asia-south1-docker.pkg.dev/$PROJECT_ID/get200-web-repo/frontend:$SHORT_SHA
+      - --region=asia-south1
+      - --platform=managed
+      - --allow-unauthenticated
 
 options:
   logging: CLOUD_LOGGING_ONLY
